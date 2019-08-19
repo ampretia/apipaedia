@@ -1,0 +1,271 @@
+<style>
+  .pae-container {
+    display: inline-block;
+    cursor: pointer;
+    position: fixed;
+    top: 0;
+    right: 0;
+  }
+
+  /* The side navigation menu */
+  .pae-sidenav {
+    height: 100%;
+    /* Originally, 100% Full-height */
+    width: 0;
+    /* 0 width - change this with JavaScript */
+    position: fixed;
+    /* Stay in place */
+    z-index: 3001;
+    /* Stay on top */
+    bottom: 0;
+    right: 0;
+    background-color: rgb(51, 51, 51);
+    /* Black*/
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
+    padding-top: 60px;
+    /* Place content 60px from the top */
+    transition: 0.5s;
+    /* 0.5 second transition effect to slide in the sidenav */
+  }
+
+  .pae-sidenav-info {
+    background-color: #666565;
+    font-family: "Source Sans Pro", Calibri, Candara, Arial, sans-serif;
+    font-weight: 300;
+    line-height: 1.1;
+    padding: 8px 8px 8px 32px;
+  }
+
+  .pae-sidenav-info p {
+    color: #cacadf;
+  }
+  .pae-sidenav-info h2 {
+    color: #cacadf;
+    font-weight: 300;
+    line-height: 1.1;
+  }
+  /* The navigation menu links */
+  .pae-sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+
+  .vertical-nav p {
+    padding: 0 0 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  .vertical-nav .sub-menu a {
+    font-size: 80%;
+  }
+
+  .pae-sidenav hr {
+    width: 80%;
+    height: 0;
+    border: 0;
+    border-top: 1px solid #818181;
+  }
+  .pae-sidenav ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  .pae-sidenav ul ul {
+    margin-left: 1.5em;
+  }
+  .pae-sidenav li li a {
+    font-size: 90%;
+  }
+  /* When you mouse over the navigation links, change their color */
+  .pae-sidenav a:hover {
+    color: #f1f1f1;
+  }
+  /* Position and style the close button (bottom right corner) */
+  .pae-sidenav .pae-closebtn {
+    position: absolute;
+    bottom: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  /* Position and style the open button (bottom right corner) */
+  .pae-openbtn {
+    position: fixed;
+    color: #818181;
+    bottom: 0;
+    border: 3px solid #818181;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  .pae-fade {
+    opacity: 0.7;
+    filter: alpha(opacity=20);
+    background-color: #000;
+    width: 0;
+    height: 100%;
+    z-index: 3000;
+    top: 0;
+    right: 0;
+    position: fixed;
+    transition: 0.5s;
+  }
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .pae-sidenav {
+      padding-top: 15px;
+    }
+    .pae-sidenav a {
+      font-size: 18px;
+    }
+  }
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .pae-sidebar {
+      padding-top: 15px;
+    }
+    .pae-sidebar a {
+      font-size: 18px;
+    }
+  }
+  /* Dropdown Button */
+  .dropbtn {
+    background-color: #666565;
+    color: white;
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  /* Dropdown button on hover & focus */
+  .dropbtn:focus,
+  .dropbtn:hover {
+    background-color: #666565;
+  }
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    padding: 8px 8px 8px 32px;
+  }
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #666565;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+  .show {
+    display: block;
+  }
+</style>
+
+<div id="pae-fade" class="pae-fade"></div>
+
+<div class="pae-container" onclick="openNav()">
+  <div class="pae-openbtn">&equiv;</div>
+</div>
+
+<div id="pae-id-sidenav" class="pae-sidenav">
+  <a href="javascript:void(0)" class="pae-closebtn" onclick="closeNav()">&times;</a >
+  <div class="pae-sidenav-info">
+    <h2>{{component}}</h2>
+    <p>{{version}}</p>
+    <a href="/index.html">
+      home
+    </a>
+  </div>
+
+  <hr/>
+  <ul class="vertical-nav">
+    {% for compName, comp in data.components %}
+      <li>
+        <p>{{compName}}</p>
+      </li>
+      <ul class="sub-menu">
+        {% for version, lang in comp %}
+          <li>
+            <p>{{version}}</p>
+          </li>
+
+          <div class="dropdown">
+            <button onclick="myFunction('myDropdown-{{compName}}-{{version}}')" class="dropbtn">Languages...</button>
+            <div id="myDropdown-{{compName}}-{{version}}" class="dropdown-content">
+              {% for langName, langInfo in lang%}
+                <a href="/{{langInfo.opPath}}/{{langInfo.root}}">{{langName}}</a>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      </ul>
+    {% endfor %}
+</ul>
+</div>
+
+<script>
+
+function myFunction(id) {
+  document
+    .getElementById(id)
+    .classList
+    .toggle("show");
+}
+function openNav() {
+  document
+    .getElementById("pae-id-sidenav")
+    .style
+    .width = "250px";
+  document
+    .getElementById("pae-fade")
+    .style
+    .width = "100%";
+}
+function closeNav() {
+  document
+    .getElementById("pae-id-sidenav")
+    .style
+    .width = "0";
+  document
+    .getElementById("pae-fade")
+    .style
+    .width = "0";
+}
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function (event) {
+  if (!event.target.matches(".dropbtn")) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains("show")) {
+        openDropdown
+          .classList
+          .remove("show");
+      }
+    }
+  }
+};
+</script>

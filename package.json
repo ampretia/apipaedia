@@ -27,7 +27,10 @@
   "dependencies": {
     "@types/parse5": "^5.0.2",
     "@types/parse5-html-rewriting-stream": "^5.1.2",
+    "cheerio": "^1.0.0-rc.3",
+    "fs-extra": "^8.1.0",
     "map-stream": "0.0.7",
+    "nunjucks": "^3.2.0",
     "parse5-html-rewriting-stream": "^5.1.0",
     "vinyl-transform": "^1.0.0"
   },

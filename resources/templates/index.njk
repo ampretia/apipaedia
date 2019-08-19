@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Hyperledger Fabric Developer Documentation
+        </title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+        <script defer="defer" src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+        <style>
+            .disabled {
+                pointer-events: none;
+                cursor: default;
+                opacity: 0.4;
+                filter: alpha(opacity=40);
+            }
+        </style>
+    </head>
+    <body>
+        <section class="section">
+
+            <h1 class="title">Hyperledger Fabric Developer Documentation</h1>
+
+        </section>
+
+        <section class="section">
+
+            <div class="columns">
+
+                {% for name, component in components %}
+                    <div class="column">
+                        <div class="card">
+                            <header class="card-header">
+                                <p class="card-header-title has-background-link has-text-light">
+                                    {{name | title}}
+                                    API
+                                </p>
+                            </header>
+                            <div class="card-content">
+                                <div class="tabs is-centered doc-client-tabs">
+
+                                    <ul>
+                                        {% for version, l in component %}
+                                            <li {% if loop.first %} class="is-active" {% endif %}>
+                                                <a data-name="{{name}}" data-version="{{version}}">{{version}}</a>
+                                            </li>
+                                        {% endfor %}
+
+                                    </ul>
+                                </div>
+                                {% for version, language in component %}
+                                    <div class="tile is-ancestor docs-component" data-name="{{name}}" data-version="{{version}}" {% if not loop.first %} style="display:none;" {% else %} {% endif %}>
+                                        {% for lang, details in language %}
+                                            <div class="tile is-parent">
+                                                <div class="title is-child box has-background-light">
+                                                    <div class="has-text-centered ">
+                                                        <div {%if details.url==='' %} class="disabled" {%endif%}>
+                                                            <div class="level">
+                                                                <figure class="image is-128x128">
+                                                                    <a href="/{{details.opPath}}/{{details.root}}" target="_blank"><img src="imgs/{{lang}}.png"></a>
+                                                                </figure>
+                                                            </div>
+                                                            <div class="">
+                                                                <a href="/{{details.opPath}}/{{details.root}}" target="_blank">
+                                                                    <h3 class="subtitle">{{lang}}</h3>
+                                                                    <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+    </body>
+
+    <script src='./script.js'></script>
+</html>

@@ -1,0 +1,80 @@
+{
+  "components": {
+    "contract": {
+      "1.4.1": {
+        "java": {
+          "url": "",
+          "root": ""
+        },
+        "typescript": {
+          "url": "./_testdocs/jsdoc/",
+          "root": "index.html"
+        },
+        "javascript": {
+          "url": "./_testdocs/jsdoc/",
+          "root": "index.html"
+        },
+        "golang": {
+          "url": "./_testdocs/godoc/",
+          "root": "index.html"
+        }
+      },
+      "2.0.0-alpha": {
+        "java": {
+          "url": "./_testdocs/javadoc/",
+          "root": "overview-summary.html"
+        },
+        "typescript": {
+          "url": "./_testdocs/jsdoc/",
+          "root": "index.html"
+        },
+        "javascript": {
+          "url": "./_testdocs/jsdoc/",
+          "root": "index.html"
+        },
+        "golang": {
+          "url": "./_testdocs/godoc/",
+          "root": "index.html"
+        }
+      }
+    },
+    "sdk": {
+      "1.4.1": {
+        "java": {
+          "url": "./_testdocs/javadoc/",
+          "root": "overview-summary.html"
+        },
+        "typescript": {
+          "url": "./_testdocs/jsdoc/",
+          "root": "index.html"
+        },
+        "javascript": {
+          "url": "./_testdocs/jsdoc/",
+          "root": "index.html"
+        },
+        "golang": {
+          "url": "./_testdocs/godoc/",
+          "root": "index.html"
+        }
+      },
+      "2.0.0-alpha": {
+        "java": {
+          "url": "./_testdocs/javadoc/",
+          "root": "overview-summary.html"
+        },
+        "typescript": {
+          "url": "./_testdocs/jsdoc/",
+          "root": "index.html"
+        },
+        "javascript": {
+          "url": "./_testdocs/jsdoc/",
+          "root": "index.html"
+        },
+        "golang": {
+          "url": "./_testdocs/godoc/",
+          "root": "index.html"
+        }
+      }
+    }
+  }
+}

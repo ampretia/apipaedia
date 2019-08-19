@@ -1,0 +1,103 @@
+function hasClass (el, className) {
+    return el.classList
+        ? el
+            .classList
+            .contains(className)
+        : new RegExp('\\b' + className + '\\b').test(el.className);
+}
+
+function addClass (el, className) {
+    if (el.classList)
+        el
+            .classList
+            .add(className);
+    else if (!hasClass(el, className))
+        el.className += ' ' + className;
+}
+
+function removeClass (el, className) {
+    if (el.classList)
+        el
+            .classList
+            .remove(className);
+    else
+        el.className = el
+            .className
+            .replace(new RegExp('\\b' + className + '\\b', 'g'), '');
+}
+
+function hide (el) {
+    el.style.display = 'none';
+}
+
+function show (el, value) {
+    el.style.display = value;
+}
+function addEvent (el, type, handler) {
+    if (el.attachEvent)
+        el.attachEvent('on' + type, handler);
+    else
+        el.addEventListener(type, handler);
+}
+function removeEvent (el, type, handler) {
+    if (el.detachEvent)
+        el.detachEvent('on' + type, handler);
+    else
+        el.removeEventListener(type, handler);
+}
+
+function getSiblings(el, filter) {
+    var siblings = [];
+    el = el.parentNode.firstChild;
+    do { if (!filter || filter(el)) siblings.push(el); } while (el = el.nextSibling);
+    return siblings;
+}
+
+let compSectionsEls = {};
+
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('Ready')
+
+    var list = document.getElementsByClassName('doc-client-tabs');
+
+    // iterate over elements and output their HTML content
+    for (var i = 0; i < list.length; i++) {
+        // attach anonymous function to click event
+        addEvent(list[i], 'click', function (e) {
+           
+            var p = e.target.parentNode;
+
+            el = p.parentNode.firstChild;
+            do { 
+                if (hasClass(el,'is-active')) { 
+                    removeClass(el,'is-active')
+                }; 
+            } while (el = el.nextSibling);      
+            
+            addClass(p,'is-active');
+
+            var name = e.target.getAttribute('data-name');
+            var version = e.target.getAttribute('data-version');
+            for (var v in compSectionsEls[name]){
+                if (v===version){
+                    show( compSectionsEls[name][v],'');
+                }else {
+                    hide( compSectionsEls[name][v]);
+                }
+            }
+            
+        })
+    }
+
+    var compSections = document.getElementsByClassName('docs-component');
+    for (var i = 0; i < compSections.length; i++) {
+        var name = compSections[i].getAttribute('data-name');
+        var ver = compSections[i].getAttribute('data-version');
+   
+        if (!compSectionsEls[name]){
+            compSectionsEls[name]={};
+        }
+        compSectionsEls[name][ver]=compSections[i];     
+    }
+
+});
